@@ -39,12 +39,12 @@ gulp.task('serve', function () {
 ```
 
 ##HTML
-**Minify**
-**Instalamos dependencias**
-`$ npm install gulp-minify-html --save-dev`
-**Agregamos dependencias a gulpfile.js**
-`var minifyHTML   = require('gulp-minify-html');`
-**Declaramos variables
+**Minify**  
+**Instalamos dependencias**  
+`$ npm install gulp-minify-html --save-dev`  
+**Agregamos dependencias a gulpfile.js**  
+`var minifyHTML   = require('gulp-minify-html');`  
+**Declaramos variables  
 ```
 var config = {
   html: {
@@ -72,8 +72,8 @@ gulp.task('watch', function(){
   gulp.watch(config.html.watch).on('change', reload);
 });
 ```
-**Ejecutamos la tarea desde build**
-`gulp.task('build', ['html']);`
+**Ejecutamos la tarea desde build**  
+`gulp.task('build', ['html']);`  
 ##Styles
 SASS  
 Autoprefixer  
@@ -139,8 +139,8 @@ gulp.task('watch', function(){
   gulp.watch(config.styles.watch).on('change', reload);
 });
 ```
-**Ejecutamos la tarea desde build**
-`gulp.task('build', ['styles']);`
+**Ejecutamos la tarea desde build**  
+`gulp.task('build', ['styles']);`  
 ##Scripts
 Uglify  
 Jshint  
@@ -189,8 +189,8 @@ gulp.task('watch', function(){
   gulp.watch(config.scripts.watch).on('change', reload);
 });
 ```
-**Ejecutamos la tarea desde build**
-`gulp.task('build', ['build:js']);`
+**Ejecutamos la tarea desde build**  
+`gulp.task('build', ['build:js']);`  
 ##Images
 Imagemin  
 Pngquant  
@@ -253,15 +253,15 @@ gulp.task('watch', function(){
   gulp.watch(config.images.watch).on('change', reload);
 });
 ```
-**Ejecutamos la tarea desde build**
-`gulp.task('build', ['build:images']);`
+**Ejecutamos la tarea desde build**  
+`gulp.task('build', ['build:images']);`  
 ##Inyectamos css y js con gulp-inject
-[Gulp Inject](https://www.npmjs.com/package/gulp-inject)
-Con gulp-inject, inyectamos archivos al html, como por ejemplo la hoja de estilo css y la hoja de script js.
-Instalación
-`$ npm install --save-dev gulp-inject`
-**Tasks**
-`var inject = require('gulp-inject');`
+[Gulp Inject](https://www.npmjs.com/package/gulp-inject)  
+Con gulp-inject, inyectamos archivos al html, como por ejemplo la hoja de estilo css y la hoja de script js.  
+**Instalación  
+`$ npm install --save-dev gulp-inject`  
+**Tasks**  
+`var inject = require('gulp-inject');`  
 ```
 // Inyectando css y js al index.html
 gulp.task('inject', function () {
@@ -285,16 +285,16 @@ gulp.task('inject', function () {
 </body>
 </html>
 ```
-**Ejecutamos la tarea desde build**
-`gulp.task('build', ['inject']);`
+**Ejecutamos la tarea desde build**  
+`gulp.task('build', ['inject']);`  
 ##Inyectamos librerías de Bower con wiredep
-[wiredep](https://www.npmjs.com/package/wiredep) 
+[wiredep](https://www.npmjs.com/package/wiredep)  
 Con wiredep, inyectamos las librerías de bower (css y js) al html. Se deben agregar las dependencias mediante el comando 
-`$ bower install --save <paquete>`
-**Instalación**
-`$ npm install --save-dev wiredep`
-**Tasks**
-`var wiredep = require('wiredep');`
+`$ bower install --save <paquete>`  
+**Instalación**  
+`$ npm install --save-dev wiredep`  
+**Tasks**  
+`var wiredep = require('wiredep');`  
 ```
 // Inyectando las librerias Bower
 gulp.task('wiredep', function () {
@@ -327,8 +327,8 @@ gulp.task('watch', function(){
 </body>
 </html>
 ```
-**bower.json**
-Agregar las siguientes líneas “overrides” antes de “dependencies”
+**bower.json**  
+Agregar las siguientes líneas “overrides” antes de “dependencies”  
 ```
 "overrides": {
     "bootstrap": {
@@ -346,8 +346,8 @@ Agregar las siguientes líneas “overrides” antes de “dependencies”
     }
   }
 ```
-**.bowerrc**
-Verificamos las siguientes líneas de código
+**.bowerrc**  
+Verificamos las siguientes líneas de código  
 ```
 {
   "directory": "app/lib",
@@ -356,29 +356,29 @@ Verificamos las siguientes líneas de código
   }
 }
 ```
-**Ejecutamos la tarea desde build**
-`gulp.task('build', ['wiredep']);`
+**Ejecutamos la tarea desde build**  
+`gulp.task('build', ['wiredep']);`  
 ##Clean
-**del**
-**Instalación**
-`$ npm install --save-dev del`
-**Tasks**
-Podemos hacer tareas por archivo o directorio, o un task clean e incluir allí todas las tareas
-`var del               = require('del');`
+**del**  
+**Instalación**  
+`$ npm install --save-dev del`  
+**Tasks**  
+Podemos hacer tareas por archivo o directorio, o un task clean e incluir allí todas las tareas  
+`var del               = require('del');`  
 ```
 // Clean
 gulp.task('clean', function(cb) {
 return del(['./dist/**/.*.html', config.styles.output, config.scripts.output, config.images.output], cb);
 });
 ```
-**Ejecutamos la tarea**
+**Ejecutamos la tarea**  
 ```
 gulp.task('default', ['clean'], function() {
   gulp.start('serve', 'watch', 'build');
 });
 ```
 ##Copy
-**Tasks**
+**Tasks**  
 ```
 //Copy
 gulp.task('copy', function () {
@@ -386,8 +386,8 @@ gulp.task('copy', function () {
   .pipe(gulp.dest('./dist/bower_components'));
 });
 ```
-**.bowerrc**
-Verificamos las siguientes líneas de código
+**.bowerrc**  
+Verificamos las siguientes líneas de código  
 ```
 {
   "directory": "app/lib",
@@ -398,10 +398,10 @@ Verificamos las siguientes líneas de código
 }
 ```
 ##Install
-**Instalación**
-`npm install --save-dev gulp-install`
-**Tasks**
-`var install = require("gulp-install");`
+**Instalación**  
+`npm install --save-dev gulp-install`  
+**Tasks**  
+`var install = require("gulp-install");`  
 ```
 //Install
 gulp.task('install', function(){
@@ -409,7 +409,7 @@ gulp.task('install', function(){
   .pipe(install());
 });
 ```
-**Ejecutamos la tarea**
+**Ejecutamos la tarea**  
 ```
 //Install
 gulp.task('update', ['install'], function(){
@@ -437,13 +437,13 @@ gulp.task('watch', function(){
 //Build
 gulp.task('build', ['html', 'styles', 'scripts', 'images', 'inject', 'wiredep']);
 ```
-Ejecutamos desde la terminal **gulp build**
+Ejecutamos desde la terminal **gulp build**  
 ##Default
-Creamos una función con start, para que primero se ejecute clean, y luego el resto de las dependencias
+Creamos una función con start, para que primero se ejecute clean, y luego el resto de las dependencias  
 ```
 //Default
 gulp.task('default', ['clean'], function() {
   gulp.start('serve', 'watch', 'build');
 });
 ```
-Ejecutamos desde la terminal **gulp**
+Ejecutamos desde la terminal **gulp**  
