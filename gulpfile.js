@@ -5,7 +5,7 @@ var minifyHTML	= require('gulp-minify-html');
 var sass			= require('gulp-sass');
 var autoprefixer	= require('gulp-autoprefixer');
 var minifycss		= require('gulp-minify-css');
-var rename		= require('gulp-rename');
+var rename			= require('gulp-rename');
 var uncss			= require('gulp-uncss');
 var jshint			= require('gulp-jshint');
 var uglify			= require('gulp-uglify');
@@ -88,7 +88,7 @@ gulp.task('build:styles', function(){
 });
 // Optimiza styles.min.css
 gulp.task('uncss', function() {
-	return gulp.src(config.styles.app + '/style.min.css')
+	return gulp.src(config.styles.app + '/**.min.css')
 	.pipe(uncss({
 		html: ['index.html', 'app/**/*.html']
 		}))
@@ -134,7 +134,7 @@ gulp.task('clean:images', function(cb) {
 // Inyectando css y js al index.html
 gulp.task('inject', function () {
 	gulp.src('./app/*.html')
-	.pipe(inject(gulp.src(['./app/styles/style.min.css', config.scripts.app+'/vendors/*.js', './app/scripts/main.min.js'], {read: false}), {relative: true}))
+	.pipe(inject(gulp.src([config.styles.app+'/vendors/*.css', './app/styles/style.min.css', config.scripts.app+'/vendors/*.js', './app/scripts/main.min.js'], {read: false}), {relative: true}))
 	.pipe(gulp.dest('./app'));
 });
 
@@ -149,7 +149,7 @@ gulp.task('wiredep', function () {
 
 // Clean
 gulp.task('clean', function(cb) {
-		return del(['./dist/**/.*.html', './dist/bower_components/**', config.styles.output, config.scripts.output, config.images.output], cb);
+	return del(['./dist/**/.*.html', './dist/bower_components/**', config.styles.output, config.scripts.output, config.images.output], cb);
 });
 
 //Install
@@ -162,13 +162,14 @@ gulp.task('install', function(){
 gulp.task('copy', function () {
 	gulp.src(['./app/bower_components/**'])
 	.pipe(gulp.dest('./dist/bower_components'));
-	gulp.src([config.scripts.app + '/vendors/**.*.js'])
+	gulp.src([config.scripts.app + '/vendors/*.js'])
 	.pipe(gulp.dest(config.scripts.output + '/vendors/'));
+	gulp.src([config.styles.app + '/vendors/*.css'])
+	.pipe(gulp.dest(config.styles.output + '/vendors/'));
 });
 
 //Watch
 gulp.task('watch', function(){
-	gulp.task('watch', function(){
 	gulp.watch(config.html.watch, ['build']).on('change', reload);
 	gulp.watch(config.styles.watch, ['styles']).on('change', reload);
 	gulp.watch(config.scripts.watch, ['scripts']).on('change', reload);
